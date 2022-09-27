@@ -2,7 +2,8 @@ from flask import Flask, redirect
 from distutils.sysconfig import PREFIX
 from resources.task import Task, TaskList, TaskSearch
 from flask_restful import Api
-from flasgger import Swagger 
+from flasgger import Swagger
+from flask_cors import CORS 
 import os 
 
 from db import db
@@ -45,7 +46,8 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['PROPAGATE_EXCEPTIONS'] = True
 app.config['SQLALCHEMY_ECHO'] = False
 
-
+#enable CORS
+CORS (app, resources={r'/*':{'origins': '*'}})
 
 @app.route('/')
 @app.route(f'{PREFIX}')
